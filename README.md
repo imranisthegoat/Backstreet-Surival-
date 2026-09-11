@@ -16,3 +16,8 @@ WALKSPEED
 
 #ENJOY!
 #SCRIPT NUMBER 3!
+
+
+#LOADSTRING:
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/imranisthegoat/Backstreet-Surival-/refs/heads/main/Script.lua"))()
