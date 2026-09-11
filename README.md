@@ -17,6 +17,13 @@ WALKSPEED
 #ENJOY!
 #SCRIPT NUMBER 3!
 
+#V2!
+#NEW:
+Delete tab
+delete cars
+delete beach guard
+delete water
+godmode (doesnt fully work)
 
 #LOADSTRING:
 
