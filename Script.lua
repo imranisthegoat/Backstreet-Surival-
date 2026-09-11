@@ -425,3 +425,95 @@ end,
 
 
 })
+
+local DeleteTab = Window:CreateTab({
+    name = "Delete",
+    icon = 6031075938
+})
+
+DeleteTab:CreateButton({
+    name = "Delete Beach Guard",
+    callback = function()
+        local npc = workspace.Map.NPC
+        local spawnpoints = workspace.Map.ScriptObjects.NPC.Beach_Spawnpoints
+
+        local guard = npc:FindFirstChild("Guard")
+        if guard then
+            guard:Destroy()
+        end
+
+        for _, name in ipairs({"Guard1", "Guard2", "Shark1", "Shark2"}) do
+            local object = spawnpoints:FindFirstChild(name)
+            if object then
+                object:Destroy()
+            end
+        end
+    end
+})
+
+DeleteTab:CreateButton({
+    name = "Delete Cars",
+    callback = function()
+        local cars = workspace.Map.ScriptObjects:FindFirstChild("Cars")
+
+        if cars then
+            cars:Destroy()
+        end
+    end
+})
+
+DeleteTab:CreateButton({
+    name = "Delete Sharks",
+    callback = function()
+        local npc = workspace.Map.NPC
+
+        local shark = npc:FindFirstChild("Shark")
+        if shark then
+            shark:Destroy()
+        end
+
+        local children = npc:GetChildren()
+        local target = children[20]
+
+        if target then
+            target:Destroy()
+        end
+
+        local water = workspace.Map.ScriptObjects:FindFirstChild("Water")
+        if water then
+            water:Destroy()
+        end
+    end
+})
+
+local GodmodeConnection
+
+DeleteTab:CreateButton({
+    name = "Godmode",
+    callback = function()
+        local function removeHealthScript()
+            local playerScript = workspace:FindFirstChild("playerusingscript")
+
+            if playerScript then
+                local healthScript = playerScript:FindFirstChild("Health")
+
+                if healthScript then
+                    healthScript:Destroy()
+                end
+            end
+        end
+
+        -- Remove it immediately
+        removeHealthScript()
+
+        -- Remove it again whenever you respawn
+        if GodmodeConnection then
+            GodmodeConnection:Disconnect()
+        end
+
+        GodmodeConnection = LocalPlayer.CharacterAdded:Connect(function()
+            task.wait(0.5)
+            removeHealthScript()
+        end)
+    end
+})
